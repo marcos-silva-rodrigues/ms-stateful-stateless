@@ -1,4 +1,6 @@
 .idea
-/**/**/target
-/**/**/.idea
-/**/.docker
+/**/target
+/**/build
+/**/.gradle
+/**/.idea
+.docker
