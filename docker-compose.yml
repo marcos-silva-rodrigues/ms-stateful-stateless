@@ -9,7 +9,7 @@ services:
     volumes:
       - "./.docker/stateless-data:/var/lib/postgresql/data"
     environment:
-      - POSTGRES_USER=auth-stateful
+      - POSTGRES_USER=auth-stateless
       - POSTGRES_PASSWORD=mysecretpassword
       - POSTGRES_DB=auth-db
 

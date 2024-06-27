@@ -1,0 +1,9 @@
+spring:
+  port: ${PORT:8080}
+  application:
+    name: any-api
+  profiles:
+    active: ${PROFILE}
+  mvc:
+    problemdetails:
+      enabled: true
