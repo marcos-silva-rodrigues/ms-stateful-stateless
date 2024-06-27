@@ -1,6 +1,38 @@
 version: "3.9"
 
+networks:
+  stateless:
+  stateful:
+
 services:
+  # STATELESS
+  stateless-auth-api:
+    build:
+      context: auth-api/
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_HOST=stateless-auth-db
+      - DB_NAME=auth-db
+      - DB_PASSWORD=mysecretpassword
+      - DB_PORT=5432
+      - DB_USERNAME=auth-stateless
+      - PROFILE=stateless
+    networks:
+      - stateless
+    depends_on:
+      - stateless-auth-db
+
+  stateless-any-api:
+    build:
+      context: any-api/
+    ports:
+      - "8081:8080"
+    environment:
+      - PROFILE=stateless
+    networks:
+      - stateless
+
   stateless-auth-db:
     container_name: stateless-auth-db
     image: postgres:latest
@@ -12,6 +44,42 @@ services:
       - POSTGRES_USER=auth-stateless
       - POSTGRES_PASSWORD=mysecretpassword
       - POSTGRES_DB=auth-db
+    networks:
+      - stateless
+    healthcheck:
+      test: pg_isready -U auth-stateless -d auth-db
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  # STATEFUL
+  stateful-auth-api:
+    build:
+      context: auth-api/
+    ports:
+      - "8082:8080"
+    environment:
+      - DB_HOST=stateful-auth-db
+      - DB_NAME=auth-db
+      - DB_PASSWORD=mysecretpassword
+      - DB_PORT=5432
+      - DB_USERNAME=auth-stateful
+      - PROFILE=stateful
+    networks:
+      - stateful
+    depends_on:
+      - stateful-auth-db
+      - token-redis
+
+  stateful-any-api:
+    build:
+      context: any-api/
+    ports:
+      - "8083:8080"
+    environment:
+      - PROFILE=stateful
+    networks:
+      - stateful
 
   stateful-auth-db:
     container_name: stateful-auth-db
@@ -24,9 +92,18 @@ services:
       - POSTGRES_USER=auth-stateful
       - POSTGRES_PASSWORD=mysecretpassword
       - POSTGRES_DB=auth-db
+    networks:
+      - stateful
+    healthcheck:
+      test: pg_isready -U auth-stateful -d auth-db
+      interval: 10s
+      timeout: 3s
+      retries: 3
 
   token-redis:
     container_name: token-redis
     image: redis:latest
     ports:
       - "6379:6379"
+    networks:
+      - stateful
