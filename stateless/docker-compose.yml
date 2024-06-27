@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  stateless-auth-db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    volumes:
+      - "./.docker/pg-data:/var/lib/postgresql/data"
+    environment:
+      - POSTGRES_USER=auth-stateless
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_DB=auth-db
