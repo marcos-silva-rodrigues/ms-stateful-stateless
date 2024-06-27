@@ -3,12 +3,10 @@ package com.rodrigues.silva.marcos.ms.auth_api.core.service;
 import com.rodrigues.silva.marcos.ms.auth_api.core.dto.AuthRequest;
 import com.rodrigues.silva.marcos.ms.auth_api.core.dto.TokenDTO;
 import com.rodrigues.silva.marcos.ms.auth_api.core.repository.UserRepository;
-import com.rodrigues.silva.marcos.ms.auth_api.infra.exception.AuthenticationException;
 import com.rodrigues.silva.marcos.ms.auth_api.infra.exception.ValidationException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
 import static org.springframework.util.ObjectUtils.isEmpty;
 

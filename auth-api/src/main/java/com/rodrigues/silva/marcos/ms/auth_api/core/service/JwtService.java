@@ -6,11 +6,8 @@ import com.rodrigues.silva.marcos.ms.auth_api.infra.exception.ValidationExceptio
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
 import javax.crypto.SecretKey;
 import java.time.LocalDateTime;
