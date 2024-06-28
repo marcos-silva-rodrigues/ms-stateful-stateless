@@ -25,8 +25,8 @@ public class JwtService {
   private static final Integer TOKEN_INDEX = 1;
   private static final Integer ONE_DAY_IN_HOURS = 24;
 
-  @Value("${app.token.secret-key")
-  private String secreyKey;
+  @Value("${app.token.secret-key}")
+  private String secretKey;
 
   public String createToken(User user) {
     var data = new HashMap<String, String>();
@@ -41,7 +41,7 @@ public class JwtService {
   }
 
   private SecretKey generateSign() {
-    return Keys.hmacShaKeyFor(secreyKey.getBytes());
+    return Keys.hmacShaKeyFor(secretKey.getBytes());
   }
 
   private Date generationExpiresAt() {
