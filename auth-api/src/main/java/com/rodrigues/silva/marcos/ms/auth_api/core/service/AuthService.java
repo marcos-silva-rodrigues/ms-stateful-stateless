@@ -5,11 +5,13 @@ import com.rodrigues.silva.marcos.ms.auth_api.core.dto.TokenDTO;
 import com.rodrigues.silva.marcos.ms.auth_api.core.repository.UserRepository;
 import com.rodrigues.silva.marcos.ms.auth_api.infra.exception.ValidationException;
 import lombok.AllArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import static org.springframework.util.ObjectUtils.isEmpty;
 
+@Profile("stateless")
 @Service
 @AllArgsConstructor
 public class AuthService {
