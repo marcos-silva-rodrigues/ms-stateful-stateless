@@ -8,15 +8,17 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 
 import static org.springframework.util.ObjectUtils.isEmpty;
 
+@Profile("stateless")
 @Service
 @RequiredArgsConstructor
-public class JwtService {
+public class JwtService implements AuthService {
 
   private static final String EMPTY_SPACE = " ";
   private static final Integer TOKEN_INDEX = 1;
@@ -28,16 +30,18 @@ public class JwtService {
     return Keys.hmacShaKeyFor(secretKey.getBytes());
   }
 
+  @Override
+  public void validateToken(String token) {
+    getClaims(token);
+  }
+
+  @Override
   public AuthUserResponse getAuthenticatedUser(String token ) {
     Claims tokenClaims = getClaims(token);
     var userId = Integer.valueOf((String) tokenClaims.get("id"));
     var username = (String) tokenClaims.get("username");
 
     return new AuthUserResponse(userId, username);
-  }
-
-  public void validateAccessToken(String token) {
-    getClaims(token);
   }
 
   public Claims getClaims(String token) {

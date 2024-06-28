@@ -5,15 +5,18 @@ import com.rodrigues.silva.marcos.ms.any_api.core.dto.AuthUserResponse;
 import com.rodrigues.silva.marcos.ms.any_api.infra.exception.AuthenticationException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+@Profile("stateful")
 @Slf4j
 @Service
 @AllArgsConstructor
-public class TokenService {
+public class TokenService implements AuthService {
 
   private final TokenClient tokenClient;
 
+  @Override
   public void validateToken(String token) {
     try {
       log.info("Sending request for token validation {}", token);
@@ -25,6 +28,7 @@ public class TokenService {
     }
   }
 
+  @Override
   public AuthUserResponse getAuthenticatedUser(String token) {
     try {
       log.info("Sending request for auth user: {}", token);

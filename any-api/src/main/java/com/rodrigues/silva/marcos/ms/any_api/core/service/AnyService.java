@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class AnyService {
 
-  private final JwtService jwtService;
+  private final AuthService authService;
 
   public AnyResponse getData(String accessToken) {
-    jwtService.validateAccessToken(accessToken);
-    var authUser = jwtService.getAuthenticatedUser(accessToken);
+    authService.validateToken(accessToken);
+    var authUser = authService.getAuthenticatedUser(accessToken);
     var ok = HttpStatus.OK;
 
     return new AnyResponse(ok.name(), ok.value(), authUser);
