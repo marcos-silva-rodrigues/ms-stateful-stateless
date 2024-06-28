@@ -14,7 +14,7 @@ import static org.springframework.util.ObjectUtils.isEmpty;
 @Profile("stateless")
 @Service
 @AllArgsConstructor
-public class AuthService {
+public class StatelessAuthService {
 
   private final PasswordEncoder passwordEncoder;
   private final UserRepository userRepository;

@@ -3,8 +3,7 @@ package com.rodrigues.silva.marcos.ms.auth_api.core.controller;
 import com.rodrigues.silva.marcos.ms.auth_api.core.dto.AuthRequest;
 import com.rodrigues.silva.marcos.ms.auth_api.core.dto.AuthUserResponse;
 import com.rodrigues.silva.marcos.ms.auth_api.core.dto.TokenDTO;
-import com.rodrigues.silva.marcos.ms.auth_api.core.service.AuthService;
-import com.rodrigues.silva.marcos.ms.auth_api.core.service.OpaqueTokenAuthService;
+import com.rodrigues.silva.marcos.ms.auth_api.core.service.StatefulAuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
@@ -18,7 +17,7 @@ import java.util.HashMap;
 @RequiredArgsConstructor
 public class StatefulAuthController {
 
-  private final OpaqueTokenAuthService service;
+  private final StatefulAuthService service;
 
   @PostMapping("login")
   public TokenDTO login(@RequestBody AuthRequest authRequest) {
