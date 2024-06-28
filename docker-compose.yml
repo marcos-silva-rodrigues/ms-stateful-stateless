@@ -65,6 +65,8 @@ services:
       - DB_PORT=5432
       - DB_USERNAME=auth-stateful
       - PROFILE=stateful
+      - REDIS_HOST=token-redis
+      - REDIS_PORT=6379
     networks:
       - stateful
     depends_on:
