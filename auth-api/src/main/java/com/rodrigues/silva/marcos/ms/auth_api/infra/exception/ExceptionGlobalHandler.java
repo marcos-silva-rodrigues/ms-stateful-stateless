@@ -24,7 +24,7 @@ public class ExceptionGlobalHandler {
   @ExceptionHandler(AuthenticationException.class)
   public ProblemDetail handle(AuthenticationException ex) {
     var problem = ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED, ex.getMessage());
-    problem.setTitle("Validation Error");
+    problem.setTitle("Authentication Error");
     problem.setProperty("timestamp", Instant.now());
     return problem;
   }
