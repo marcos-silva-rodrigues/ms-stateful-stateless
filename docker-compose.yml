@@ -80,6 +80,7 @@ services:
       - "8083:8080"
     environment:
       - PROFILE=stateful
+      - BASE_URL=http://stateful-auth-api:8080
     networks:
       - stateful
 
