@@ -1,0 +1,3 @@
+app:
+  token:
+    secret-key: ${JWT_SECRET:YXV0ZW50aWNhY2FvLXN0YXRlZnVsLXN0YXRlbGVzcy1taWNyb3NzZXJ2aWNvcw==}
